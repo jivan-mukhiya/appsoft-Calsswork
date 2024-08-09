@@ -1,0 +1,48 @@
+SELECT * FROM publisher
+
+SELECT * FROM author
+
+SELECT * FROM book
+
+--Join query
+
+
+--print book title, author name,publisher,price,author name,publisher date
+
+
+
+SELECT b.title, a.name author,p.name publisher,b.price,b.publishDate 
+FROM book as b
+ JOIN author as a on a.id=b.authorId JOIN publisher as p
+ on b.publisherId=p.id;
+
+
+ SELECT b.title,b.price, a.name author,p.name publisherName FROM book as
+  b JOIN author as a on a.id=b.authorId JOIN publisher as p on p.id=b.publisherId;
+
+
+  --Book which is publicsh last 30 years
+
+SELECT * FROM book WHERE publishDate BETWEEN '1994-01-01' AND '2024-01-01'
+  
+
+  --get total price of book publisher by parijat
+
+  
+  SELECT sum(price) FROM book
+   as b JOIN publisher as p on b.publisherId=p.ID WHERE p.name="asmita"
+
+   --get publisher in desecending oder with number of books publisher so far
+
+   SELECT p.name, COUNT(b.id) AS book_count
+FROM book b
+JOIN publisher p ON b.publisherId = p.ID
+GROUP BY p.name
+ORDER BY book_count DESC;
+
+   -- get all author with comma ,seprated list of books they have written
+
+   SELECT a.name, GROUP_CONCAT(b.title, ', ') AS book
+FROM author a
+JOIN book b ON b.authorId = a.ID
+GROUP BY a.name;
